@@ -44,7 +44,11 @@ Main objective of this project was to have single base code base for the IOS and
 <img src="./assets/Foodie.png"  />
 
 
-### Project Requirement 
+#### Project Requirement 
 ** Front-End: react-native: 0.59.9 / react-native-cli: 2.0.1
 ** Backend : JSON 
 ** Database : Firestore Database
+
+#### User login 
+username: test
+Password: 1234
