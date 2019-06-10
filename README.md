@@ -40,5 +40,11 @@ Main objective of this project was to have single base code base for the IOS and
 ```
 
 
-#### Design Appliction
-<img src="Foodie.png"  />
+#### Architecture Flow 
+<img src="./assets/Foodie.png"  />
+
+
+### Project Requirement 
+** Front-End: react-native: 0.59.9 / react-native-cli: 2.0.1
+** Backend : JSON 
+** Database : Firestore Database

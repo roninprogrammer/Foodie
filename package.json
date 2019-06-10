@@ -7,10 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "firebase": "^6.1.1",
     "flow-bin": "^0.27.0",
     "react": "16.8.3",
     "react-native": "0.59.9",
-    "react-native-hockeyapp": "^0.5.3"
+    "react-native-hockeyapp": "^0.5.3",
+    "save": "^2.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
