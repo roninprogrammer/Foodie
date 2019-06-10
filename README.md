@@ -28,15 +28,7 @@ Main objective of this project was to have single base code base for the IOS and
         /service            - API methods
         /store              - store config
         /utils              - some utility functions
-
-    /web                    - react js web specific code
-        /screens            - connected to store components
-        /components         - react components
-        /base_components    - reusable react components
-        /App.js             - App Root component
-        /routes.js          - route config
-    /webpack                - webpack config
-    
+      
 ```
 
 
