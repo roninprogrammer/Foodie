@@ -14,7 +14,6 @@ Main objective of this project was to have single base code base for the IOS and
         /base_components    - reusable react native components
         /components         - react native components
         /screens            - connected to store components
-        /App.js             - App Root component
         /actions            - all redux actions
         /constants          - colors and Assets
         /reducers           - all reducers
@@ -26,6 +25,7 @@ Main objective of this project was to have single base code base for the IOS and
         
     /assets                 - contains image and fonts
     /ios                    - React native ios source code
+    /App.js                 - App Root component
     
     
       
