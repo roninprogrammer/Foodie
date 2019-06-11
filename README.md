@@ -8,28 +8,27 @@ Main objective of this project was to have single base code base for the IOS and
 
 #### Project Structure 
 ```
+
     /android                - React native android source code
     
     /app                    - React native specific code
-        /base_components    - reusable react native components
+		/api				- API module class. Each file will be feature based like ProductAPI, LoginAPI etc
         /components         - react native components
-        /screens            - connected to store components
-        /actions            - all redux actions
-        /constants          - colors and Assets
-        /reducers           - all reducers
-        /sagas              - all redux sagas  
-        /service            - API methods
+		/config				- Universal styles,images,metrics
+        /feature           	- Config File
+        /lib              	- Lib helper file   
+        /navigation         - All naviagtion related studd including helpers functions and navigation stack
         /store              - store config
-        /utils              - some utility functions
-        /router.js          - route config
+        /App.js             - App Root component    
         
     /assets                 - contains image and fonts
     /ios                    - React native ios source code
-    /App.js                 - App Root component
-    
-    
-      
+     
 ```
+
+This Architecture is optimised for large scale projects. If you are beginner who just started using react native, I would suggest starting with a type based architecture and slowly switching to this architecture.
+
+
 
 
 #### Architecture Flow 
