@@ -15,12 +15,6 @@ Main objective of this project was to have single base code base for the IOS and
         /components         - react native components
         /screens            - connected to store components
         /App.js             - App Root component
-        /router.js          - route config
-        
-    /assets                 - contains image and fonts
-    /ios                    - React native ios source code
-    
-    /src
         /actions            - all redux actions
         /constants          - colors and Assets
         /reducers           - all reducers
@@ -28,6 +22,12 @@ Main objective of this project was to have single base code base for the IOS and
         /service            - API methods
         /store              - store config
         /utils              - some utility functions
+        /router.js          - route config
+        
+    /assets                 - contains image and fonts
+    /ios                    - React native ios source code
+    
+    
       
 ```
 
