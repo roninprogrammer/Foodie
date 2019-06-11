@@ -42,5 +42,5 @@ Main objective of this project was to have single base code base for the IOS and
 * Database : Firestore Database
 
 #### User login 
-username: test
-Password: 1234
+* username: test
+* Password: 1234
