@@ -8,28 +8,25 @@ Main objective of this project was to have single base code base for the IOS and
 
 #### Project Structure 
 ```
+
     /android                - React native android source code
-    
-    /app                    - React native specific code
-        /base_components    - reusable react native components
+    	/app                - React native specific code
+	/api		    - API module class. Each file will be feature based like ProductAPI, LoginAPI etc
         /components         - react native components
-        /screens            - connected to store components
-        /App.js             - App Root component
-        /router.js          - route config
-        
+	/config		    - Universal styles,images,metrics
+        /feature            - Config File
+        /lib                - Lib helper file   
+        /navigation         - All naviagtion related studd including helpers functions and navigation stack
+        /store              - store config
+        /App.js             - App Root component    
     /assets                 - contains image and fonts
     /ios                    - React native ios source code
-    
-    /src
-        /actions            - all redux actions
-        /constants          - colors and Assets
-        /reducers           - all reducers
-        /sagas              - all redux sagas  
-        /service            - API methods
-        /store              - store config
-        /utils              - some utility functions
-      
+     
 ```
+
+This project is configured with redux, redux saga and redux persist. Latest version of react-navigation with NavigationService instead of Redux Integration. This Type based Architecture scales smoothly based on this application
+
+
 
 
 #### Architecture Flow 
@@ -37,10 +34,10 @@ Main objective of this project was to have single base code base for the IOS and
 
 
 #### Project Requirement 
-** Front-End: react-native: 0.59.9 / react-native-cli: 2.0.1
-** Backend : JSON 
-** Database : Firestore Database
+* Front-End: react-native: 0.59.9 / react-native-cli: 2.0.1
+* Backend : JSON 
+* Database : Firestore Database
 
 #### User login 
-username: test
-Password: 1234
+* username: test
+* Password: 1234
