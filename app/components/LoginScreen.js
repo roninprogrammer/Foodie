@@ -23,6 +23,7 @@ class LoginScreen extends React.Component {
       };
 
       onPressLogin = () => {
+        console.log(this.state);
         Keyboard.dismiss();
         var {dispatch, navigate} = this.props.navigation;
         this.setState({
