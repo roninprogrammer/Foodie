@@ -1,8 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native";
+import { AsyncStorage, Keyboard, StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native";
 import { AppStyles } from '../config/AppStyles';
-import Button from "react-native-button";
-import { AsyncStorage } from "react-native";
+import Button from 'react-native-button';
+import {NavigationActions} from 'react-navigation';
+import firebaseApp from '../config/firebase';
+const FBSDK = require("react-native-fbsdk");
+const { LoginManager, AccessToken } = FBSDK;
 class LoginScreen extends React.Component {
  
     constructor(props) {
@@ -14,6 +17,105 @@ class LoginScreen extends React.Component {
         };
       }
 
+      validateEmail = (email) => {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(email);
+      };
+
+      onPressLogin = () => {
+        Keyboard.dismiss();
+        var {dispatch, navigate} = this.props.navigation;
+        this.setState({
+            loading:true
+        })
+        
+        const reset = NavigationActions.reset({
+            index:0,
+            key: null,
+            actions:[
+                NavigationActions.navigate({routeName:'SignedIn'})
+            ]
+        });
+
+        const { email, password } = this.state;
+        if (email.length <= 0 || password.length <= 0) {
+          alert("Please fill out the required fields.");
+          return;
+        } 
+        if (!this.validateEmail(this.state.email)) {
+          // not a valid email
+          alert("Please enter valid email");
+        } 
+
+        firebaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then((userdata)=>{
+            AsyncStorage.setItem('userdata', JSON.stringify(userdata));
+            dispatch(reset);
+            console.log('Success');
+        }).catch((error)=>{
+            alert("Login failed. Please try again");
+            console.log(error);
+        })
+        
+      };
+
+      onPressFacebook = () => {
+        LoginManager.logInWithReadPermissions([
+          "public_profile",
+          "user_friends",
+          "email"
+        ]).then(
+          result => {
+            if (result.isCancelled) {
+              alert("Whoops!", "You cancelled the sign in.");
+            } else {
+              AccessToken.getCurrentAccessToken().then(data => {
+                const credential = firebase.auth.FacebookAuthProvider.credential(
+                  data.accessToken
+                );
+                const accessToken = data.accessToken;
+                firebase
+                  .auth()
+                  .signInWithCredential(credential)
+                  .then(result => {
+                    var user = result.user;
+                    AsyncStorage.setItem(
+                      "@loggedInUserID:facebookCredentialAccessToken",
+                      accessToken
+                    );
+                    AsyncStorage.setItem("@loggedInUserID:id", user.uid);
+                    var userDict = {
+                      id: user.uid,
+                      fullname: user.displayName,
+                      email: user.email,
+                      profileURL: user.photoURL
+                    };
+                    var data = {
+                      ...userDict,
+                      appIdentifier: "rn-android-universal-listings"
+                    };
+                    firebase
+                      .firestore()
+                      .collection("users")
+                      .doc(user.uid)
+                      .set(data);
+                    this.props.navigation.dispatch({
+                      type: "Login",
+                      user: userDict
+                    });
+                  })
+                  .catch(error => {
+                    alert("Please try again! " + error);
+                  });
+              });
+            }
+          },
+          error => {
+            Alert.alert("Sign in error", error);
+          }
+        );
+      }
+
       render() {
         var {navigate} = this.props.navigation;
         return (
@@ -23,7 +125,7 @@ class LoginScreen extends React.Component {
             <View style={styles.InputContainer}>
               <TextInput
                 style={styles.body}
-                placeholder="E-mail or phone number"
+                placeholder="E-mail Address"
                 onChangeText={text => this.setState({ email: text })}
                 value={this.state.email}
                 placeholderTextColor={AppStyles.color.grey}
@@ -52,7 +154,7 @@ class LoginScreen extends React.Component {
            <Button
             containerStyle = {styles.facebookContainer}
             style = {styles.facebookText}
-            onPress = {() => this.this.onPressFacebook()}
+            onPress = {() => this.onPressFacebook()}
             >
             Login with facebook
             </Button>
