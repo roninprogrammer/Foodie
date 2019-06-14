@@ -20,10 +20,12 @@ export const SignedOut = StackNavigator({
     navigationOptions:{ header:null}
   },
   SignUp: {
-    screen: SignUp
+    screen: SignUp,
+    navigationOptions:{ header:null}
   },
   Reset: {
-    screen: Reset
+    screen: Reset,
+    navigationOptions:{ header:null}
   }
 });
 

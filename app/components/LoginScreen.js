@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native";
 import { AppStyles } from '../config/AppStyles';
 import Button from "react-native-button";
 import { AsyncStorage } from "react-native";
@@ -15,11 +15,11 @@ class LoginScreen extends React.Component {
       }
 
       render() {
+        var {navigate} = this.props.navigation;
         return (
           <View style={styles.container}>
                 <Text style={[styles.title, styles.leftTitle]}>Sign In</Text>
-                <Text style={[styles.forgetPassword, styles.rightTitle]}>Forget Password?</Text>
-
+               
             <View style={styles.InputContainer}>
               <TextInput
                 style={styles.body}
@@ -56,7 +56,14 @@ class LoginScreen extends React.Component {
             >
             Login with facebook
             </Button>
+            <Button
+                 onPress={()=>navigate('SignUp')}>
             <Text style={[styles.signUpContainer, styles.signUpText]}>Don't Have an account?  <Text style={{fontWeight: "bold"}}>Sign Up</Text></Text>
+            </Button>
+            <TouchableOpacity onPress={()=>navigate('Reset')}>
+                     <Text style={[styles.forgetPassword, styles.rightTitle]}>Forget Password?</Text>
+             </TouchableOpacity>
+  
           </View>
         );
       }
