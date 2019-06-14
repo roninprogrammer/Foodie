@@ -17,7 +17,9 @@ class LoginScreen extends React.Component {
       render() {
         return (
           <View style={styles.container}>
-            <Text style={[styles.title, styles.leftTitle]}>Sign In</Text>
+                <Text style={[styles.title, styles.leftTitle]}>Sign In</Text>
+                <Text style={[styles.forgetPassword, styles.rightTitle]}>Forget Password?</Text>
+
             <View style={styles.InputContainer}>
               <TextInput
                 style={styles.body}
@@ -47,13 +49,14 @@ class LoginScreen extends React.Component {
               Log in
             </Button>
             <Text style={styles.or}>OR</Text>
-            <Button
-              containerStyle={styles.facebookContainer}
-              style={styles.facebookText}
-              onPress={() => this.onPressFacebook()}
+           <Button
+            containerStyle = {styles.facebookContainer}
+            style = {styles.facebookText}
+            onPress = {() => this.this.onPressFacebook()}
             >
-              Login with Facebook
+            Login with facebook
             </Button>
+            <Text style={[styles.signUpContainer, styles.signUpText]}>Don't Have an account?  <Text style={{fontWeight: "bold"}}>Sign Up</Text></Text>
           </View>
         );
       }
@@ -76,6 +79,17 @@ class LoginScreen extends React.Component {
         color: AppStyles.color.tint,
         marginTop: 20,
         marginBottom: 20
+      },
+      forgetPassword : {
+        fontSize: AppStyles.fontSize.mini,
+        fontWeight: "normal",
+        color: AppStyles.color.text,
+       
+      },
+      rightTitle: {
+        alignSelf: "stretch",
+        textAlign: "right",
+        marginRight: 20
       },
       leftTitle: {
         alignSelf: "stretch",
@@ -126,7 +140,17 @@ class LoginScreen extends React.Component {
       },
       facebookText: {
         color: AppStyles.color.white
+      },
+      signUpContainer: {
+        width: AppStyles.buttonWidth.main,
+        padding: 10,
+        marginTop: 50,
+        textAlign: 'center',
+      },
+      signUpText: {
+        color: AppStyles.color.categoryTitle
       }
+
     });
     
     export default LoginScreen;

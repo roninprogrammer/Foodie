@@ -10,15 +10,15 @@ Main objective of this project was to have single base code base for the IOS and
 ```
 
     /android                - React native android source code
-    	/app                - React native specific code
-	/api		    - API module class. Each file will be feature based like ProductAPI, LoginAPI etc
-        /components         - react native components
-	/config		    - Universal styles,images,metrics
-        /feature            - Config File
-        /lib                - Lib helper file   
-        /navigation         - All naviagtion related studd including helpers functions and navigation stack
-        /store              - store config
-        /App.js             - App Root component    
+    /app                    - React native specific code
+	/api		            - API module class. Each file will be feature based like ProductAPI,                             LoginAPI etc
+    /components             - react native components
+	/config		            - Universal styles,images,metrics
+    /feature                - Config File
+    /lib                    - Lib helper file   
+    /navigation             - All naviagtion related studd including helpers functions and                                   navigation stack
+    /store                  - store config
+    /App.js                 - App Root component    
     /assets                 - contains image and fonts
     /ios                    - React native ios source code
      
@@ -38,6 +38,7 @@ This project is configured with redux, redux saga and redux persist. Latest vers
 * Backend : JSON 
 * Database : Firestore Database
 
-#### User login 
+### Instruction 
+#### 
 * username: test
 * Password: 1234

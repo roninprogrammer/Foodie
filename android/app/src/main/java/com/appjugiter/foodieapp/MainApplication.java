@@ -24,6 +24,10 @@ import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 
 import java.util.Arrays;
 import java.util.List;
+// react-native-splash-screen >= 0.3.1
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+// react-native-splash-screen < 0.3.1
+// import com.cboy.rn.splashscreen.SplashScreenReactPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -41,13 +45,9 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new RNHockeyAppPackage(MainApplication.this),
-          new MainReactPackage(),
-          new GoogleAnalyticsBridgePackage(),
-          new FBSDKPackage(mCallbackManager),
-          new RNFirebasePackage(),
-          new RNFirebaseDatabasePackage());
+      return Arrays.<ReactPackage>asList(new RNHockeyAppPackage(MainApplication.this), new MainReactPackage(),
+          new GoogleAnalyticsBridgePackage(), new FBSDKPackage(mCallbackManager), new RNFirebasePackage(),
+          new RNFirebaseDatabasePackage(), new SplashScreenReactPackage());
 
     }
 

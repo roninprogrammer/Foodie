@@ -26,7 +26,8 @@ export const AppStyles = {
   fontSize: {
     title: 30,
     content: 20,
-    normal: 16
+    normal: 16,
+    mini: 13,
   },
   buttonWidth: {
     main: "70%"

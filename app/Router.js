@@ -1,20 +1,39 @@
-import React, {Component} from 'react';
 import Login from './components/LoginScreen';
-import Signup from './components/SignUpScreen';
-import ResetPassword from './components/ResetPasswordScreen';
+import SignUp from './components/SignUpScreen';
 import Dashboard from './components/Dashboard';
-import {createStackNavigator, createAppContainer} from 'react-navigation';
+import Reset from './components/ResetPasswordScreen';
+import { StackNavigator, createStackNavigator } from 'react-navigation'
 
-const RootNavigator = createStackNavigator({
-  Login: {screen: Login},
-  Signup: {screen: Signup},
-  ResetPassword: {screen : ResetPassword},
-  Dashboard : {screen: Dashboard}
 
+export const StackOverTabs = StackNavigator({
+  Dashboard: {
+    screen: Dashboard,
+    navigationOptions: {
+      title: "Dashboard"
+    }
+  },
 });
 
-const App = createAppContainer(RootNavigator);
+export const SignedOut = StackNavigator({
+  Login: {
+    screen: Login,
+    navigationOptions:{ header:null}
+  },
+  SignUp: {
+    screen: SignUp
+  },
+  Reset: {
+    screen: Reset
+  }
+});
 
-export default App;
-
-
+export const RootNavigator = (signedin=false)=>{
+  return StackNavigator({
+      SignedIn: {screen: StackOverTabs},
+      SignedOut:{screen:SignedOut }
+  },{
+      headerMode:'none',
+      mode:'modal',
+      initialRouteName: signedin? 'SignedIn':'SignedOut'
+  })
+}
