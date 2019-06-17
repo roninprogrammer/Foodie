@@ -6,15 +6,14 @@ import {NavigationActions} from 'react-navigation';
 import firebaseApp from '../config/firebase';
 const FBSDK = require("react-native-fbsdk");
 const { LoginManager, AccessToken } = FBSDK;
-
-
+import Spinner from 'react-native-loading-spinner-overlay';
 
 class LoginScreen extends React.Component {
  
     constructor(props) {
         super(props);
         this.state = {
-          loading: true,
+          loading: false,
           email: "",
           password: ""
         };
@@ -49,6 +48,7 @@ class LoginScreen extends React.Component {
         if (!this.validateEmail(this.state.email)) {
           // not a valid email
           alert("Please enter valid email");
+          return;
         } 
 
         firebaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
@@ -59,6 +59,9 @@ class LoginScreen extends React.Component {
         }).catch((error)=>{
             alert("Login failed. Please try again");
             console.log(error);
+            this.setState({
+              loading:false
+          })
         })
         
       };
@@ -124,7 +127,15 @@ class LoginScreen extends React.Component {
         var {navigate} = this.props.navigation;
         return (
           <View style={styles.container}>
-                <Text style={[styles.title, styles.leftTitle]}>Sign In</Text>
+            <Spinner
+              //visibility of Overlay Loading Spinner
+              visible={this.state.loading}
+              //Text with the Spinner
+              textContent={'Loading...'}
+              //Text style of the Spinner Text
+              textStyle={styles.spinnerTextStyle}
+            />
+            <Text style={[styles.title, styles.leftTitle]}>Sign In</Text>
                
             <View style={styles.InputContainer}>
               <TextInput
@@ -262,7 +273,10 @@ class LoginScreen extends React.Component {
       },
       signUpText: {
         color: AppStyles.color.categoryTitle
-      }
+      },
+      spinnerTextStyle: {
+        color: '#FFF',
+      },
 
     });
     

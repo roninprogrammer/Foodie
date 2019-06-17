@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, ActivityIndicator, Keyboard } from 'react-native';
 import { AppStyles } from '../config/AppStyles';
 import Button from "react-native-button";
-import firebase from '../config/firebase';
+import firebaseApp from '../config/firebase';
+import Spinner from 'react-native-loading-spinner-overlay';
+import { NavigationActions } from 'react-navigation';
+import {tracker} from '../config/analytics';
 
 
 export default class SignUp extends Component{
@@ -20,7 +23,7 @@ export default class SignUp extends Component{
     }
 
     componentDidMount() {
-      this.authSubscription = firebase.auth().onAuthStateChanged(user => {
+      this.authSubscription = firebaseApp.auth().onAuthStateChanged(user => {
         this.setState({
           loading: false,
           user
@@ -38,7 +41,7 @@ export default class SignUp extends Component{
       Keyboard.dismiss();
       var {dispatch, navigate} = this.props.navigation;
       this.setState({                                                                                          
-          loaded:false
+        loading:false
       });
 
       const { fullname, phone, email, password } = this.state;
@@ -54,32 +57,44 @@ export default class SignUp extends Component{
             NavigationActions.navigate({routeName:'Login'})
         ]
     });
-  }
-    // // call to firebase to make new user
-    // firebaseApp.auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
-    // .then(function(user){
-        
-    //     alert('Your account was created!');
-    //     dispatch(reset); 
-    //     tracker.trackEvent('Auth','Succesfully Signedup')
 
-    //     firebaseApp.database().ref('usersInfo/'+ user.uid).set({
-    //         email: user.email
-    //     });
+      // // call to firebase to make new user
+    firebaseApp.auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
+    .then(function(user){
+        
+        alert('Your account was created!');
+        dispatch(reset); 
+        tracker.trackEvent('Auth','Succesfully Signedup')
+
+        firebaseApp.database().ref('usersInfo/'+ user.uid).set({
+            email: user.email
+        });
    
-    // }).catch((error)=>{
-    //     this.setState({                                                                                      
-    //         loaded:true
-    //     });
-    //     // Handle Errors here.
-    //     // var errorCode = error.code;
-    //     var errorMessage = error.message;
-    //     alert(errorMessage);
-    //     // console.log(errorMessage);
-    // });
+    }).catch((error)=>{
+        this.setState({                                                                                      
+            loaded:true
+        });
+        // Handle Errors here.
+        // var errorCode = error.code;
+        var errorMessage = error.message;
+        alert(errorMessage);
+        // console.log(errorMessage);
+    });
+  }
+
+
+  
     render() {
         return (
           <View style={styles.container}>
+           <Spinner
+              //visibility of Overlay Loading Spinner
+              visible={this.state.loading}
+              //Text with the Spinner
+              textContent={'Loading...'}
+              //Text style of the Spinner Text
+              textStyle={styles.spinnerTextStyle}
+            />
             <Text style={[styles.title, styles.leftTitle]}>Create new account</Text>
             <View style={styles.InputContainer}>
               <TextInput
