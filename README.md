@@ -13,7 +13,7 @@ Main objective of this project was to have single base code base for the IOS and
     /app                    - React native specific code
 	/api		            - API module class.
     /components             - react native components
-	/config		            - Universal styles,images,metrics
+    /config		    - Universal styles,images,metrics
     /feature                - Config File
     /lib                    - Lib helper file   
     /navigation             - All navigation related including helpers functions and navigation
