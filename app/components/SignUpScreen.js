@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, ActivityIndicator, Keyboard } from 'react-native';
 import { AppStyles } from '../config/AppStyles';
 import Button from "react-native-button";
+import firebase from '../config/firebase';
 
 
 export default class SignUp extends Component{
@@ -9,15 +10,73 @@ export default class SignUp extends Component{
     constructor(props){
         super(props);
         this.state = {
-            loaded:true,
-            email:'',
-            password:'',
-            // cpassword:''                                                                                    
+          loading: true,
+          fullname: "",
+          phone: "",
+          email: "",
+          password: ""                                                                                   
         };
         
     }
 
+    componentDidMount() {
+      this.authSubscription = firebase.auth().onAuthStateChanged(user => {
+        this.setState({
+          loading: false,
+          user
+        });
+      });
+    }
+
+    componentWillUnmount() {
+      this.authSubscription();
+      
+    }
   
+
+    onRegister = () => {
+      Keyboard.dismiss();
+      var {dispatch, navigate} = this.props.navigation;
+      this.setState({                                                                                          
+          loaded:false
+      });
+
+      const { fullname, phone, email, password } = this.state;
+      if(fullname.length <= 0 || phone.length <= 0 || email.length <= 0 || password.length <= 0){
+        alert("Please fill out the required fields.");
+        return;
+      }
+    
+
+      const reset = NavigationActions.reset({
+        index:0,
+        actions:[
+            NavigationActions.navigate({routeName:'Login'})
+        ]
+    });
+  }
+    // // call to firebase to make new user
+    // firebaseApp.auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
+    // .then(function(user){
+        
+    //     alert('Your account was created!');
+    //     dispatch(reset); 
+    //     tracker.trackEvent('Auth','Succesfully Signedup')
+
+    //     firebaseApp.database().ref('usersInfo/'+ user.uid).set({
+    //         email: user.email
+    //     });
+   
+    // }).catch((error)=>{
+    //     this.setState({                                                                                      
+    //         loaded:true
+    //     });
+    //     // Handle Errors here.
+    //     // var errorCode = error.code;
+    //     var errorMessage = error.message;
+    //     alert(errorMessage);
+    //     // console.log(errorMessage);
+    // });
     render() {
         return (
           <View style={styles.container}>
@@ -79,12 +138,13 @@ export default class SignUp extends Component{
 
             <View>
                     <Text style={{color:'black', fontSize: 14, marginTop:20}} onPress={() => this.props.navigation.goBack()}>Back</Text>
-                </View>
+            </View>
     
           </View>
         );
       }
     }
+  
     
     const styles = StyleSheet.create({
       container: {

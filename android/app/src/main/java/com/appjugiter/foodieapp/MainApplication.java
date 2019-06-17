@@ -3,6 +3,7 @@ package com.appjugiter.foodieapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -12,7 +13,6 @@ import com.facebook.soloader.SoLoader;
 import com.slowpath.hockeyapp.RNHockeyAppModule; // <--- import
 import com.slowpath.hockeyapp.RNHockeyAppPackage; // <--- import
 
-import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 
 import com.facebook.CallbackManager;

@@ -6,6 +6,9 @@ import {NavigationActions} from 'react-navigation';
 import firebaseApp from '../config/firebase';
 const FBSDK = require("react-native-fbsdk");
 const { LoginManager, AccessToken } = FBSDK;
+
+
+
 class LoginScreen extends React.Component {
  
     constructor(props) {
