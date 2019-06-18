@@ -8,7 +8,6 @@ import {
   Image,
   View
 } from 'react-native';
-import {NavigationActions, StackNavigator} from 'react-navigation';
 import LogoutButton from '../features/LogoutButton';
 import mealData from '../api/meal';
 import MealItem from "../features/MealItem";
@@ -21,26 +20,39 @@ import AppStyles from '../config/AppStyles';
 export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loading: false,
+    };
   }
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: "Foodie",
       headerStyle: {
         elevation: 0,
-        shadowOpacity: 0
+        shadowOpacity: 0,
+        backgroundColor: 'white'
+     
       },
+      headerTitleStyle: { color: '#ff5a66' },
       headerRight: (
         <LogoutButton
           onPress={() => {
-            AsyncStorage.clear().then(()=>{
-            firebaseApp.auth().signOut().then(()=>{
-              navigation.navigate({routeName:'SignedOut'});
-                //tracker.trackEvent('Auth', 'User Loggedout');
-            }).catch((error)=>{
+            this.state = {
+              loading: true,
+            };
+            navigation.navigate("Login");
+            AsyncStorage.clear().then(() => {
+              firebaseApp.auth().signOut().then(() => {
+                alert("Sign Off");
+                this.state = {
+                  loading: false,
+                };
+              }).catch((error) => {
                 console.log(error);
                 alert(error);
+              })
             })
-        })
+
           }}
         />
       )
@@ -52,6 +64,12 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Spinner
+
+          visible={this.state.loading}
+          textContent={'Loading...'}
+          textStyle={styles.spinnerTextStyle}
+        />
         <FlatList
           data={mealData}
           keyExtractor={item => item.id}
