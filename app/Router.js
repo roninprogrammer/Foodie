@@ -26,7 +26,7 @@ export const SignedOut = StackNavigator({
   Reset: {
     screen: Reset,
     navigationOptions:{ header:null}
-  }
+  },
 });
 
 export const RootNavigator = (signedin=false)=>{

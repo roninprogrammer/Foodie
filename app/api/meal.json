@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "name": "Nasi Lemak",
+    "description": "nasi lemak is served with a hot spicy sauce (sambal), and usually includes various garnishes, including fresh cucumber",
+    "calories": "585.0",
+    "image": "https://s3-ap-southeast-1.amazonaws.com/afc-prod/thumbnails/standard_mobile/8314/9656/4485/tn-Nasi-Lemak-with-Sambal-Ikan-Bilis.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Speghetti Carbonara",
+    "description": "An Italian pasta dish from Rome made with egg, hard cheese, guanciale, and black pepper",
+    "calories": "630.0",
+    "image": "https://img1.cookinglight.timeinc.net/sites/default/files/styles/medium_2x/public/1533151875/whole-wheat-pasta-carbonara-1809-p116.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Speghetti Carbonara",
+    "description": "An Italian pasta dish from Rome made with egg, hard cheese, guanciale, and black pepper",
+    "calories": "630.0",
+    "image": "https://img1.cookinglight.timeinc.net/sites/default/files/styles/medium_2x/public/1533151875/whole-wheat-pasta-carbonara-1809-p116.jpg"
+  },
+  {
+    "id": "4",
+    "name": "Chinese Dumpling",
+    "description": "bite-sized food that's made of savory ingredients wrapped in dough and cooked",
+    "calories": "41.0",
+    "image": "https://img1.cookinglight.timeinc.net/sites/default/files/styles/medium_2x/public/1533151875/whole-wheat-pasta-carbonara-1809-p116.jpg"
+  }
+]

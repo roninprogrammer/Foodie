@@ -9,7 +9,7 @@ const { LoginManager, AccessToken } = FBSDK;
 import Spinner from 'react-native-loading-spinner-overlay';
 
 class LoginScreen extends React.Component {
- 
+
     constructor(props) {
         super(props);
         this.state = {
@@ -31,7 +31,7 @@ class LoginScreen extends React.Component {
         this.setState({
             loading:true
         })
-        
+
         const reset = NavigationActions.reset({
             index:0,
             key: null,
@@ -43,13 +43,19 @@ class LoginScreen extends React.Component {
         const { email, password } = this.state;
         if (email.length <= 0 || password.length <= 0) {
           alert("Please fill out the required fields.");
+          this.setState({
+            loading:false
+        })
           return;
-        } 
+        }
         if (!this.validateEmail(this.state.email)) {
           // not a valid email
           alert("Please enter valid email");
+          this.setState({
+            loading:false
+        })
           return;
-        } 
+        }
 
         firebaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .then((userdata)=>{
@@ -63,13 +69,12 @@ class LoginScreen extends React.Component {
               loading:false
           })
         })
-        
+
       };
 
       onPressFacebook = () => {
         LoginManager.logInWithReadPermissions([
           "public_profile",
-          "user_friends",
           "email"
         ]).then(
           result => {
@@ -77,11 +82,12 @@ class LoginScreen extends React.Component {
               alert("Whoops!", "You cancelled the sign in.");
             } else {
               AccessToken.getCurrentAccessToken().then(data => {
-                const credential = firebase.auth.FacebookAuthProvider.credential(
+                const credential = firebaseApp.auth.FacebookAuthProvider.credential(
                   data.accessToken
                 );
                 const accessToken = data.accessToken;
-                firebase
+                console.log(accessToken.toString());
+                firebaseApp
                   .auth()
                   .signInWithCredential(credential)
                   .then(result => {
@@ -101,7 +107,7 @@ class LoginScreen extends React.Component {
                       ...userDict,
                       appIdentifier: "rn-android-universal-listings"
                     };
-                    firebase
+                    firebaseApp
                       .firestore()
                       .collection("users")
                       .doc(user.uid)
@@ -135,8 +141,8 @@ class LoginScreen extends React.Component {
               //Text style of the Spinner Text
               textStyle={styles.spinnerTextStyle}
             />
-            <Text style={[styles.title, styles.leftTitle]}>Sign In</Text>
-               
+            <Text style={[styles.title, styles.leftTitle]}>Log In</Text>
+
             <View style={styles.InputContainer}>
               <TextInput
                 style={styles.body}
@@ -165,7 +171,9 @@ class LoginScreen extends React.Component {
             >
               Log in
             </Button>
-            <Text style={styles.or}>OR</Text>
+
+            <Text style={styles.or}>────────────  OR  ──────────── </Text>
+
            <Button
             containerStyle = {styles.facebookContainer}
             style = {styles.facebookText}
@@ -180,12 +188,12 @@ class LoginScreen extends React.Component {
             <TouchableOpacity onPress={()=>navigate('Reset')}>
                      <Text style={[styles.forgetPassword, styles.rightTitle]}>Forget Password?</Text>
              </TouchableOpacity>
-  
+
           </View>
         );
       }
     }
-    
+
     const styles = StyleSheet.create({
       container: {
         flex: 1,
@@ -194,6 +202,8 @@ class LoginScreen extends React.Component {
       or: {
         fontFamily: AppStyles.fontName.main,
         color: "black",
+        paddingHorizontal: 5,
+        alignSelf: 'center',
         marginTop: 40,
         marginBottom: 10
       },
@@ -208,7 +218,7 @@ class LoginScreen extends React.Component {
         fontSize: AppStyles.fontSize.mini,
         fontWeight: "normal",
         color: AppStyles.color.text,
-       
+
       },
       rightTitle: {
         alignSelf: "stretch",
@@ -277,7 +287,13 @@ class LoginScreen extends React.Component {
       spinnerTextStyle: {
         color: '#FFF',
       },
+      hairline: {
+        backgroundColor: '#A2A2A2',
+        height: 2,
+        width: 165
+      },
+
 
     });
-    
+
     export default LoginScreen;

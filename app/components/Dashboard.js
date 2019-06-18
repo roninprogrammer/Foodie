@@ -1,37 +1,56 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
   Text,
+  FlatList,
+  Image,
   View
 } from 'react-native';
+import LogoutButton from '../features/LogoutButton';
+import mealData from '../api/meal';
+import MealItem from "../features/MealItem";
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
-export default class Dashboard extends Component {
+export default class Restaurants extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: "Foodie",
+      headerStyle: {
+        elevation: 0,
+        shadowOpacity: 0
+      },
+      headerRight: (
+        <LogoutButton
+          onPress={() => {
+            navigation.navigate("Cart");
+          }}
+        />
+      )
+    };
+  };
+  handleNaviagation = () => {
+    this.props.navigation.navigate("Dishes");
+  };
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Hello world
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <FlatList
+          data={mealData}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <MealItem
+              name={item.name}
+              image={item.image}
+              description={item.description}
+              calories={item.calories}
+              handleNaviagation={this.handleNaviagation}
+            />
+          )}
+        />
       </View>
     );
   }
@@ -39,19 +58,8 @@ export default class Dashboard extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    width: "100%",
+    marginTop: 8,
+    marginBottom: 8
+  }
 });

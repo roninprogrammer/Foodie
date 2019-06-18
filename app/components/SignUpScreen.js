@@ -8,7 +8,7 @@ import { NavigationActions } from 'react-navigation';
 import {tracker} from '../config/analytics';
 
 
-export default class SignUp extends Component{
+export default class SignUp extends React.Component{
 
     constructor(props){
         super(props);
@@ -17,9 +17,9 @@ export default class SignUp extends Component{
           fullname: "",
           phone: "",
           email: "",
-          password: ""                                                                                   
+          password: ""
         };
-        
+
     }
 
     componentDidMount() {
@@ -33,15 +33,15 @@ export default class SignUp extends Component{
 
     componentWillUnmount() {
       this.authSubscription();
-      
+
     }
-  
+
 
     onRegister = () => {
       Keyboard.dismiss();
       var {dispatch, navigate} = this.props.navigation;
-      this.setState({                                                                                          
-        loading:false
+      this.setState({
+        loading:true
       });
 
       const { fullname, phone, email, password } = this.state;
@@ -49,30 +49,31 @@ export default class SignUp extends Component{
         alert("Please fill out the required fields.");
         return;
       }
-    
 
       const reset = NavigationActions.reset({
-        index:0,
-        actions:[
-            NavigationActions.navigate({routeName:'Login'})
-        ]
-    });
+            index:0,
+            actions:[
+                NavigationActions.navigate({routeName:'Login'})
+            ]
+        });
+
 
       // // call to firebase to make new user
     firebaseApp.auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
     .then(function(user){
-        
-        alert('Your account was created!');
-        dispatch(reset); 
-        tracker.trackEvent('Auth','Succesfully Signedup')
+          alert('Your account was created!');
+          dispatch(reset);
+          tracker.trackEvent('Auth','Succesfully Signedup')
+      
+        user_uid = user.uid;
 
-        firebaseApp.database().ref('usersInfo/'+ user.uid).set({
-            email: user.email
+        firebaseApp.database().ref('users/' + user_uid ).set({
+            email: user.email,
         });
-   
+
     }).catch((error)=>{
-        this.setState({                                                                                      
-            loaded:true
+        this.setState({
+          loading:false
         });
         // Handle Errors here.
         // var errorCode = error.code;
@@ -83,7 +84,7 @@ export default class SignUp extends Component{
   }
 
 
-  
+
     render() {
         return (
           <View style={styles.container}>
@@ -107,7 +108,7 @@ export default class SignUp extends Component{
               />
               </View>
 
-              
+
             <View style={styles.InputContainer}>
               <TextInput
                 style={styles.body}
@@ -149,18 +150,18 @@ export default class SignUp extends Component{
               onPress={() => this.onRegister()}
             >
               Sign Up
-            </Button> 
+            </Button>
 
             <View>
                     <Text style={{color:'black', fontSize: 14, marginTop:20}} onPress={() => this.props.navigation.goBack()}>Back</Text>
             </View>
-    
+
           </View>
         );
       }
     }
-  
-    
+
+
     const styles = StyleSheet.create({
       container: {
         flex: 1,
@@ -224,5 +225,3 @@ export default class SignUp extends Component{
         color: AppStyles.color.white
       }
     });
-
-
