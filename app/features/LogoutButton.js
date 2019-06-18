@@ -19,9 +19,8 @@ class LogoutButton extends React.Component {
             <TouchableOpacity onPress={this.handleNavigate}>
                 <Image
                     style={{ width: 32, height: 32, marginRight: 16 }}
-                    // source={require("../../assets/icons/shutdown@1x.png")}
+                    source={require('../../assets/image/logout.png')}
                 />
-              
             </TouchableOpacity>
         );
     }

@@ -66,3 +66,6 @@ type the following in your command prompt to install and launched at your app at
 ```
 $ react-native run-android
 ```
+
+#### 4. APK 
+Download link : <a href="https://rink.hockeyapp.net/apps/a31ed87e0e164272a6a973bdd32494c4/app_versions/1" download>Download FOODIE.APK</a>

@@ -3,13 +3,18 @@ import {
   Platform,
   StyleSheet,
   Text,
+  AsyncStorage,
   FlatList,
   Image,
   View
 } from 'react-native';
+import {NavigationActions, StackNavigator} from 'react-navigation';
 import LogoutButton from '../features/LogoutButton';
 import mealData from '../api/meal';
 import MealItem from "../features/MealItem";
+import firebaseApp from '../config/firebase';
+import tracker from '../config/analytics';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 
 export default class Restaurants extends React.Component {
@@ -26,7 +31,15 @@ export default class Restaurants extends React.Component {
       headerRight: (
         <LogoutButton
           onPress={() => {
-            navigation.navigate("Cart");
+            AsyncStorage.clear().then(()=>{
+            firebaseApp.auth().signOut().then(()=>{
+              navigation.navigate("LoginScreen");
+                //tracker.trackEvent('Auth', 'User Loggedout');
+            }).catch((error)=>{
+                console.log(error);
+                alert(error);
+            })
+        })
           }}
         />
       )

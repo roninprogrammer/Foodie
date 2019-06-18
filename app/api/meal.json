@@ -15,16 +15,16 @@
   },
   {
     "id": "3",
-    "name": "Speghetti Carbonara",
-    "description": "An Italian pasta dish from Rome made with egg, hard cheese, guanciale, and black pepper",
-    "calories": "630.0",
-    "image": "https://img1.cookinglight.timeinc.net/sites/default/files/styles/medium_2x/public/1533151875/whole-wheat-pasta-carbonara-1809-p116.jpg"
+    "name": "Dosa",
+    "description": "A a cooked flat thin layered rice batter, originating from the Indian subcontinent, made from a fermented batter",
+    "calories": "2,000.0",
+    "image": "https://apollosugar.com/wp-content/uploads/2018/12/Rava-Dosa-1024x683.jpg"
   },
   {
     "id": "4",
     "name": "Chinese Dumpling",
     "description": "bite-sized food that's made of savory ingredients wrapped in dough and cooked",
     "calories": "41.0",
-    "image": "https://img1.cookinglight.timeinc.net/sites/default/files/styles/medium_2x/public/1533151875/whole-wheat-pasta-carbonara-1809-p116.jpg"
+    "image": "https://images-gmi-pmc.edge-generalmills.com/c1517889-0f2c-4de2-895a-69dbc16cd9d9.jpg"
   }
 ]

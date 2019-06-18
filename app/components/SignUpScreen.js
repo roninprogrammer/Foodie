@@ -67,9 +67,9 @@ export default class SignUp extends React.Component{
       
         user_uid = user.uid;
 
-        firebaseApp.database().ref('users/' + user_uid ).set({
-            email: user.email,
-        });
+        // firebaseApp.database().ref('users/' + user_uid ).set({
+        //     email: user.email,
+        // });
 
     }).catch((error)=>{
         this.setState({

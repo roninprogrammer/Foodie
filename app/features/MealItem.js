@@ -71,7 +71,7 @@ export default class MealItem extends React.Component {
                 color: "#ffffff"
               }}
             >
-              {this.props.calories},{" "}
+              Calories : {this.props.calories}
 
             </Text>
           </View>
