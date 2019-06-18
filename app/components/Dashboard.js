@@ -15,9 +15,10 @@ import MealItem from "../features/MealItem";
 import firebaseApp from '../config/firebase';
 import tracker from '../config/analytics';
 import Spinner from 'react-native-loading-spinner-overlay';
+import AppStyles from '../config/AppStyles';
 
 
-export default class Restaurants extends React.Component {
+export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -33,7 +34,7 @@ export default class Restaurants extends React.Component {
           onPress={() => {
             AsyncStorage.clear().then(()=>{
             firebaseApp.auth().signOut().then(()=>{
-              navigation.navigate("LoginScreen");
+              navigation.navigate({routeName:'SignedOut'});
                 //tracker.trackEvent('Auth', 'User Loggedout');
             }).catch((error)=>{
                 console.log(error);
