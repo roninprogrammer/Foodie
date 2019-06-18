@@ -72,4 +72,4 @@ Download link : <a href="https://rink.hockeyapp.net/apps/a31ed87e0e164272a6a973b
 
 
 #### 5. DEMO 
-[!](https://vimeo.com/user99850858/review/342896814/c625c3dd41)
+<a href="https://vimeo.com/user99850858/review/342896814/c625c3dd41">DEMO VIDEO</a>
